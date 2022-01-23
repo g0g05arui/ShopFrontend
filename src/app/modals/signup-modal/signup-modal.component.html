@@ -1,1 +1,24 @@
-<p>signup-modal works!</p>
+<div class="signup-modal">
+    <div class="title">
+        Create a user
+    </div>
+    <form [formGroup]="options" class="signup-modal">
+        <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="test@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput  [formControl]="password" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput  [formControl]="passwordConfirmed" required>
+            <mat-error *ngIf="password.value!=passwordConfirmed.value">Passwords do not match</mat-error>
+        </mat-form-field>
+        <button type="submit" class="button is-primary submit-button" [disabled]="!options.valid" (click)="onSubmit()">Sign Up</button>
+    </form>
+    <progress class="progress is-small is-primary" max="100" *ngIf="isLoading">15%</progress>
+
+</div>
